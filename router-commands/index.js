@@ -6,8 +6,8 @@ module.exports = function(msg, match, bot) {
 
 	switch(command) {
 		case 'add':
-			storage.add(msg, data, function() {
-				bot.sendMessage(msg.chat.id, 'Record was successfully added!');
+			storage.add(msg, data, function(message) {
+				bot.sendMessage(msg.chat.id, message);
 			});
 			break;
 		case 'list':
