@@ -12,7 +12,7 @@ typeorm.createConnection().then((connection: typeorm.Connection) => {
 
 	bot.onText(/\/([^\s]+)\s+(.+)/, (msg: any, match: string[]): void => {
 		console.info('Received a message from the user.');
-		
+
 		routerCommands(msg, match, bot);
 	});
 }).catch(error => {
