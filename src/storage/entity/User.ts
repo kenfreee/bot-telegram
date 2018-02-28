@@ -1,9 +1,10 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
+import Record from "./Record";
 
 @Entity()
 export default class User {
-    constructor(user_id, firstname, lastname) {
-        this.user_id = user_id;
+    constructor(user_telegram_id: number, firstname: string, lastname: string) {
+        this.user_telegram_id = user_telegram_id;
         this.firstname = firstname;
         this.lastname = lastname;
     }
@@ -16,7 +17,7 @@ export default class User {
         unique: true,
         nullable: false
     })
-    user_id: number;
+    user_telegram_id: number;
 
     @Column({
         type: 'varchar',
@@ -29,4 +30,11 @@ export default class User {
         length: 100
     })
     lastname: string;
+
+    @OneToMany(type => Record, record => record.user, {
+        eager: true,
+        cascadeInsert: true, 
+        cascadeUpdate: true    
+    })
+    records: Record[];
 }
